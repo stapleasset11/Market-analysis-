@@ -12,5 +12,12 @@
 
 ## Conclusion.
 
+### THe z-critical value from the stndrd normal distribution: 1.959963984540054
+### P-value of the 2 sample Z-test: 0.0
+### There is statistical significance,indicating that the observed differences between the groups are unlikely to have occured by accident
+### The confidence intrval of a 2-sample z-test: [np.float64(0.399), np.float64(0.426)]
+### We have practical significance With an MDE of 0.1 the difference between control and experimental groups is practically sinificant.
+### Lower bound of 95% confidence interval is  0.39
+
 ![Case study](visualizations/Standard-Normal-Distribution.png)
 
