@@ -12,5 +12,5 @@
 
 ## Conclusion.
 
-![Case study](visualizations/Standard Normal Distribution.png)
+![Case study](visualizations/Standard Normal Distribution".png)
 
