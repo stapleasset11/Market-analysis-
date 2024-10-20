@@ -1,0 +1,24 @@
+visualizations
+
+# Ignore virtual environments
+dat/
+venv/
+env/
+
+# Ignore Python cache files
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore local environment variables
+.env
+
+# Ignore installation files
+*.egg-info/
+*.egg/
+dist/
+build/
+python-dataScience/
