@@ -144,7 +144,7 @@ plt.ylabel("Probability Density")
 plt.title("Gaussian Distribution with Rejection Region \n (AB Testing for LunarTech CTA button)")
 plt.legend()
 
-plt.savefig('visualizations/Standard Normal Distribution".png')  # Save the figure as a PNG file
+plt.savefig('visualizations/Standard-Normal-Distribution.png')  # Save the figure as a PNG file
 plt.close()
 
 
