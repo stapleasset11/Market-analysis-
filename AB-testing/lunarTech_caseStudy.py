@@ -94,7 +94,7 @@ print(f"Standard error: {SE}")
 Test_stat = (p_con_hat - p_exp_hat) / SE
 print(f"Test statistics for the 2 sample Z-test: {Test_stat}")
 
-z_crit = norm.ppf((1 - alpha)/2)
+z_crit = norm.ppf(1 - alpha/2)
 print(f"THe z-critical value from the stndrd normal distribution: {z_crit}")
 
 
@@ -121,10 +121,63 @@ def statistical_significance(p_value,alpha):
         print("There is nostatistical significance indicating that the differences between the groups are likely to have occurred by accident.")
 
 
-statistical_significance(p_value.any(),alpha)
+statistical_significance(p_value,alpha)
 
 
+#parameters of the standard normal distribution.
+
+mu = 0
+sigma = 1
+
+x = np.linspace(mu - 3*sigma,mu + 3*sigma,100)
+y = norm.pdf(x,mu,sigma) 
+
+plt.plot(x,y, label="Standard Normal Distribution")
+plt.fill_between(x,y,where=(x > z_crit) | (x < -z_crit), color="red", alpha=0.5 ,label="Rejection region" )
+plt.axvline(Test_stat,color="green",linestyle="dashed",linewidth = 2,label = f'Test statistic = {Test_stat:.2f}')
+plt.axvline(z_crit,color="blue",linestyle="dashed",linewidth = 1,label = f'Z-critical = {z_crit:.2f}')
+plt.axvline(-z_crit,color="blue",linestyle="dashed",linewidth = 1)
 
 
+plt.xlabel("z-value")
+plt.ylabel("Probability Density")
+plt.title("Gaussian Distribution with Rejection Region \n (AB Testing for LunarTech CTA button)")
+plt.legend()
 
- 
+plt.savefig('visualizations/Standard Normal Distribution".png')  # Save the figure as a PNG file
+plt.close()
+
+
+#Calculating the confidence interval.
+
+CI = [
+    round((p_exp_hat - p_con_hat) - SE*z_crit,3), # Lower bound
+    round((p_exp_hat - p_con_hat) + SE*z_crit,3) #Upper bound
+]
+
+
+print("The confidence intrval of a 2-sample z-test:", CI)
+
+#Testing for practical significance in AB Testing.
+
+def is_practically_significant(delta,CI_95):
+    """
+    We assess whether the difference btn control and experimental groups is practically significant using the Minimum Detectable Effect(MDE).
+    """
+
+    lower_bound_CI  = CI_95[0]
+
+    if lower_bound_CI >= delta :
+        print(f"We have practical significance \n With an MDE of {delta} the difference between control and experimental groups is practically sinificant.")
+        return True
+    else:
+        print(f"We don't have practical significance.\n The difference between control and experimental groups is not practically significant.")
+        return False
+    
+
+#Assume 
+
+CI_95 = CI
+
+significance = is_practically_significant(delta,CI_95)
+print("Lower bound of 95% confidence interval is ", CI_95[0])
